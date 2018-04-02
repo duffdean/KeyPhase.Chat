@@ -1,4 +1,7 @@
-﻿body {
+﻿html {
+    background: #4c515f;
+}
+body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
@@ -24,7 +27,7 @@ legend {
 }
 
 textarea {
-    min-height: 75px;
+    /*min-height: 75px;*/
 }
 
 .editor-label {

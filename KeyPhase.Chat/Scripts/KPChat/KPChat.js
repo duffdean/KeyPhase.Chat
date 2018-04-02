@@ -1,5 +1,9 @@
 ﻿var user = JSON.parse($.cookie('KPUser'));
-var displayName = user.FirstName + ' ' + user.LastName;
+var displayName = {
+    FirstName: user.FirstName,
+    FullName: user.FirstName + ' ' + user.LastName
+}
+var userCount = 0;
 
 $(function () {
     //showModalUserNickName();
@@ -18,29 +22,35 @@ function showModalUserNickName() {
     });
 }
 
+function updateUserCount() {
+    $('.onlineUsers-count').text(userCount);
+}
+
 function startChartHub() {
     var chat = $.connection.chatHub;
 
     // Get the user name.
     
     chat.client.differentName = function (name) {
-        chat.server.notify(displayName, $.connection.hub.id);
+        chat.server.notify(displayName.FirstName, $.connection.hub.id);
     };
 
     chat.client.online = function (name) {
-        // Update list of users
+         //Update list of users
         if (name == displayName)
-            $('#onlineusers').append('<div class="border" style="color:green">You: ' + name + '</div>');
+            userCount++;
         else {
-            $('#onlineusers').append('<div class="border">' + name + '</div>');
-            $("#users").append('<option value="' + name + '">' + name + '</option>');
+            userCount++;
+            //$('#onlineusers').append('<div class="border">' + name + '</div>');
+            //$("#users").append('<option value="' + name + '">' + name + '</option>');
         }
+        updateUserCount();
     };
 
     chat.client.enters = function (name) {
-        $('#chatlog').append('<div style="font-style:italic;"><i>' + name + ' joins the conversation</i></div>');
+        $('#chatlog').append('<div style="font-style:italic; "color: #44bd32;font-weight: 100;"><i>' + name + ' is now online.</i></div>');
         $("#users").append('<option value="' + name + '">' + name + '</option>');
-        $('#onlineusers').append('<div class="border">' + name + '</div>');
+        //$('#onlineusers').append('<div class="border">' + name + '</div>');
     };
     // Create a function that the hub can call to broadcast chat messages.
     chat.client.broadcastMessage = function (name, message) {
@@ -50,29 +60,32 @@ function startChartHub() {
         message = message.replace(":o", "<img src=\"/images/cool.gif\" class=\"smileys\" />");
 
         //display the message
-        $('#chatlog').append('<div class="border"><span style="color:red">' + name + '</span>: ' + message + '</div>');
+        $('#chatlog').append('<div class="border chatlog-message"><span class="chatlog-user" title="' + displayName.FullName + '">' + name + '</span>: ' + message + '</div>');
     };
-
+  
     chat.client.disconnected = function (name) {
         //Calls when someone leaves the page
-        $('#chatlog').append('<div style="font-style:italic;"><i>' + name + ' leaves the conversation</i></div>');
-        $('#onlineusers div').remove(":contains('" + name + "')");
+        $('#chatlog').append('<div style="font-style:italic;color: #e84118;font-weight: 100;"><i>' + name + ' is now offline.</i></div>');
+        //$('#onlineusers div').remove(":contains('" + name + "')");
+        userCount--;
+        updateUserCount();
         $("#users option").remove(":contains('" + name + "')");
     }
 
     // Start the connection.
     $.connection.hub.start().done(function () {
         //Calls the notify method of the server
-        chat.server.notify(displayName, $.connection.hub.id);
+        chat.server.notify(displayName.FirstName, $.connection.hub.id);
 
         $('#btnsend').click(function () {
-            if ($("#users").val() == "All") {
-                // Call the Send method on the hub.
-                chat.server.send(displayName, $('#message').val());
-            }
-            else {
-                chat.server.sendToSpecific(displayName, $('#message').val(), $("#users").val());
-            }
+            chat.server.send(displayName.FirstName, $('#message').val());
+            //if ($("#users").val() == "All") {
+            //    // Call the Send method on the hub.
+            //    chat.server.send(displayName, $('#message').val());
+            //}
+            //else {
+            //    chat.server.sendToSpecific(displayName, $('#message').val(), $("#users").val());
+            //}
             // Clear text box and reset focus for next comment.
             $('#message').val('').focus();
         });
