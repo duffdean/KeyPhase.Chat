@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "KeyPhase";
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery-ui-1.9.2.min.js")
+    @Scripts.Render("~/Scripts/jquery.signalR-1.0.1.min.js")
+    @Scripts.Render("/signalr/hubs")
+
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/KPChat/KPChat.js"></script>
+
+}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <div class="onlineUsers-count"></div>
+    <div class="material-icons onlineUsers">
+        person
+        <div class="onlineUsers-content">
+            <div class="onlineUsers-list"></div>
+        </div>
+    </div>
+   
+
+<div id="container" style="background: #4c515f;">
+    @*<input type="hidden" id="nickname" />*@
+    <div id="chatlog"></div>
+    @*<div id="onlineusers">
+        <b>Online Users</b>
+    </div>*@
+    <div id="chatarea" style="background: #4c515f;">
+        <div class="messagelog">
+            <textarea spellcheck="true" id="message" class="messagebox"></textarea>
+            <input class="sendBtn" type="button" id="btnsend" value="Send"/>
+        </div>
+        @*<div class="actionpane">
+            
+        </div>*@
+        @*<div class="actionpane">
+            <select id="users">
+                <option value="All">All</option>
+            </select>
+        </div>*@
+    </div>
+    @*<div id="dialog" title="Enter your name to start a chat.">
+        <input type="text" id="nick" />
+    </div>*@
+</div>
