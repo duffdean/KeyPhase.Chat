@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a93adb9f9fd49ecb926023691c9bdee" Name="Diagram1">
+        <EntityTypeShape EntityType="keyphaseModel.Label" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.Phase" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.Project" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.ProjectHistory" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.ProjectTaskPhase" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.Task" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.TaskHistory" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.Team" Width="1.5" PointX="12.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.TeamProject" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="keyphaseModel.User" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="keyphaseModel.FK_Label_Label" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_Label_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_Project_Phase" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_ProjectTaskPhase_Phase" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_Task_Phase" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_ProjectHistory_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_TeamProject_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_ProjectHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_TaskHistory_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_TaskHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.FK_Team_User" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.PhaseCore" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.PhaseUser" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.ProjectPhase" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.ProjectTask" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.TeamUser" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.UserProject" ManuallyRouted="false" />
+        <AssociationConnector Association="keyphaseModel.UserTask" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

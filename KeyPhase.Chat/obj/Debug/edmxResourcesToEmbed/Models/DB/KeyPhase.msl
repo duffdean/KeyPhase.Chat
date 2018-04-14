@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="keyphaseModelStoreContainer" CdmEntityContainer="keyphaseEntities">
+    <EntitySetMapping Name="Labels">
+      <EntityTypeMapping TypeName="keyphaseModel.Label">
+        <MappingFragment StoreEntitySet="Label">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phases">
+      <EntityTypeMapping TypeName="keyphaseModel.Phase">
+        <MappingFragment StoreEntitySet="Phase">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="keyphaseModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+          <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+          <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+          <ScalarProperty Name="ActStartDate" ColumnName="ActStartDate" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectHistories">
+      <EntityTypeMapping TypeName="keyphaseModel.ProjectHistory">
+        <MappingFragment StoreEntitySet="ProjectHistory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectTaskPhases">
+      <EntityTypeMapping TypeName="keyphaseModel.ProjectTaskPhase">
+        <MappingFragment StoreEntitySet="ProjectTaskPhase">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="keyphaseModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+          <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+          <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+          <ScalarProperty Name="ActStartDate" ColumnName="ActStartDate" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskHistories">
+      <EntityTypeMapping TypeName="keyphaseModel.TaskHistory">
+        <MappingFragment StoreEntitySet="TaskHistory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="keyphaseModel.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeamProjects">
+      <EntityTypeMapping TypeName="keyphaseModel.TeamProject">
+        <MappingFragment StoreEntitySet="TeamProject">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="keyphaseModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="BgColour" ColumnName="BgColour" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PhaseCore" TypeName="keyphaseModel.PhaseCore" StoreEntitySet="PhaseCore">
+      <EndProperty Name="Phase">
+        <ScalarProperty Name="ID" ColumnName="PhaseID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhaseUser" TypeName="keyphaseModel.PhaseUser" StoreEntitySet="PhaseUser">
+      <EndProperty Name="Phase">
+        <ScalarProperty Name="ID" ColumnName="PhaseID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectPhase" TypeName="keyphaseModel.ProjectPhase" StoreEntitySet="ProjectPhase">
+      <EndProperty Name="Phase">
+        <ScalarProperty Name="ID" ColumnName="PhaseID" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="ProjectID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectTask" TypeName="keyphaseModel.ProjectTask" StoreEntitySet="ProjectTask">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="ProjectID" />
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="TaskID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeamUser" TypeName="keyphaseModel.TeamUser" StoreEntitySet="TeamUser">
+      <EndProperty Name="Team">
+        <ScalarProperty Name="ID" ColumnName="TeamID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserProject" TypeName="keyphaseModel.UserProject" StoreEntitySet="UserProject">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="ProjectID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserTask" TypeName="keyphaseModel.UserTask" StoreEntitySet="UserTask">
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="TaskID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

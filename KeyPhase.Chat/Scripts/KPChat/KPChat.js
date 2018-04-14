@@ -1,8 +1,34 @@
-﻿var user = JSON.parse($.cookie('KPUser'));
+﻿//var user = JSON.parse($.cookie('KPUser')); //Call user service for this data instead... from querystring
+//Persistent error with CORS. so will need to use the local 18.221.239.64/KeyPhase.usersfor ajax
+var user = getUser();
 var displayName = {
-    FirstName: user.FirstName,
-    FullName: user.FirstName + ' ' + user.LastName
+    FirstName: '',
+    FullName: ''
 }
+function getUser() {
+    $.ajax({
+        url: 'http://users.keyphase.net/api/user/getbasic',
+        type: "GET",
+        data: {
+            UserID: getQueryStringValue("UserID")
+        }
+    }).done(function (obj) {
+        displayName.FirstName = obj.FirstName;
+        displayName.FullName = obj.FirstName + ' ' + obj.LastName;
+    }).fail(function (obj) {
+
+    });
+};
+
+function getQueryStringValue(key) {
+    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
+
+//// Would write the value of the QueryString-variable called name to the console
+//console.log(getQueryStringValue("UserID"));
+//1
+
+
 var userCount = 0;
 
 $(function () {

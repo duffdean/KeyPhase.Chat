@@ -1,0 +1,1201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="keyphaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="TaskID" Type="int" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="PhaseCore">
+          <Key>
+            <PropertyRef Name="PhaseID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="PhaseID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhaseUser">
+          <Key>
+            <PropertyRef Name="PhaseID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="PhaseID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhaseID" Type="int" />
+          <Property Name="EstStartDate" Type="datetime" />
+          <Property Name="EstEndDate" Type="datetime" />
+          <Property Name="ActStartDate" Type="datetime" />
+          <Property Name="ActEndDate" Type="datetime" />
+          <Property Name="Budget" Type="float" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProjectHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateSubmitted" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProjectPhase">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="PhaseID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="PhaseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectTask">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectTaskPhase">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="PhaseID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="PhaseID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhaseID" Type="int" />
+          <Property Name="EstStartDate" Type="datetime" />
+          <Property Name="EstEndDate" Type="datetime" />
+          <Property Name="ActStartDate" Type="datetime" />
+          <Property Name="ActEndDate" Type="datetime" />
+          <Property Name="Cost" Type="float" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Complete" Type="bit" />
+          <Property Name="CompletionDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="TaskHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateSubmitted" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Owner" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="TeamProject">
+          <Key>
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamUser">
+          <Key>
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProfilePicture" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BgColour" Type="nvarchar" MaxLength="25" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserProject">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTask">
+          <Key>
+            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Label_Label">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Label" Type="Self.Label" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Label">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Label_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Label" Type="Self.Label" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Label">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhaseCore_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
+          <End Role="PhaseCore" Type="Self.PhaseCore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhaseCore">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhaseCore_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="PhaseCore" Type="Self.PhaseCore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhaseCore">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhaseUser_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
+          <End Role="PhaseUser" Type="Self.PhaseUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhaseUser">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhaseUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="PhaseUser" Type="Self.PhaseUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhaseUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectHistory_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectHistory" Type="Self.ProjectHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectHistory">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectHistory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ProjectHistory" Type="Self.ProjectHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPhase_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
+          <End Role="ProjectPhase" Type="Self.ProjectPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectPhase">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPhase_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectPhase" Type="Self.ProjectPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectPhase">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTask_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectTask">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTask_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectTask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskPhase_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
+          <End Role="ProjectTaskPhase" Type="Self.ProjectTaskPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectTaskPhase">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamProject_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="TeamProject" Type="Self.TeamProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamProject">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamUser_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="TeamUser" Type="Self.TeamUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamUser">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TeamUser" Type="Self.TeamUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTask_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="UserTask" Type="Self.UserTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserTask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTask_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserTask" Type="Self.UserTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserTask">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="keyphaseModelStoreContainer">
+          <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhaseCore" EntityType="Self.PhaseCore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhaseUser" EntityType="Self.PhaseUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectHistory" EntityType="Self.ProjectHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectPhase" EntityType="Self.ProjectPhase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTask" EntityType="Self.ProjectTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTaskPhase" EntityType="Self.ProjectTaskPhase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskHistory" EntityType="Self.TaskHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamProject" EntityType="Self.TeamProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamUser" EntityType="Self.TeamUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProject" EntityType="Self.UserProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTask" EntityType="Self.UserTask" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Label_Label" Association="Self.FK_Label_Label">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Label" EntitySet="Label" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Label_Task" Association="Self.FK_Label_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Label" EntitySet="Label" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhaseCore_Phase" Association="Self.FK_PhaseCore_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="PhaseCore" EntitySet="PhaseCore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhaseCore_User" Association="Self.FK_PhaseCore_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PhaseCore" EntitySet="PhaseCore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhaseUser_Phase" Association="Self.FK_PhaseUser_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="PhaseUser" EntitySet="PhaseUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhaseUser_User" Association="Self.FK_PhaseUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PhaseUser" EntitySet="PhaseUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Phase" Association="Self.FK_Project_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectHistory_Project" Association="Self.FK_ProjectHistory_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectHistory" EntitySet="ProjectHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectHistory_User" Association="Self.FK_ProjectHistory_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ProjectHistory" EntitySet="ProjectHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPhase_Phase" Association="Self.FK_ProjectPhase_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="ProjectPhase" EntitySet="ProjectPhase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPhase_Project" Association="Self.FK_ProjectPhase_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectPhase" EntitySet="ProjectPhase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTask_Project" Association="Self.FK_ProjectTask_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectTask" EntitySet="ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTask_Task" Association="Self.FK_ProjectTask_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="ProjectTask" EntitySet="ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskPhase_Phase" Association="Self.FK_ProjectTaskPhase_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="ProjectTaskPhase" EntitySet="ProjectTaskPhase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Phase" Association="Self.FK_Task_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_Task" Association="Self.FK_TaskHistory_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskHistory" EntitySet="TaskHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_User" Association="Self.FK_TaskHistory_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskHistory" EntitySet="TaskHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_User" Association="Self.FK_Team_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamProject_Project" Association="Self.FK_TeamProject_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="TeamProject" EntitySet="TeamProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamUser_Team" Association="Self.FK_TeamUser_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamUser" EntitySet="TeamUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamUser_User" Association="Self.FK_TeamUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TeamUser" EntitySet="TeamUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_Project" Association="Self.FK_UserProject_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="UserProject" EntitySet="UserProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_User" Association="Self.FK_UserProject_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProject" EntitySet="UserProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTask_Task" Association="Self.FK_UserTask_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="UserTask" EntitySet="UserTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTask_User" Association="Self.FK_UserTask_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserTask" EntitySet="UserTask" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="keyphaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="TaskID" Type="Int32" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Label_Label" FromRole="Label" ToRole="Project" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Label_Task" FromRole="Label" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Phase" FromRole="Phase" ToRole="Project" />
+          <NavigationProperty Name="ProjectTaskPhases" Relationship="Self.FK_ProjectTaskPhase_Phase" FromRole="Phase" ToRole="ProjectTaskPhase" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Phase" FromRole="Phase" ToRole="Task" />
+          <NavigationProperty Name="Users" Relationship="Self.PhaseCore" FromRole="Phase" ToRole="User" />
+          <NavigationProperty Name="Users1" Relationship="Self.PhaseUser" FromRole="Phase" ToRole="User" />
+          <NavigationProperty Name="Projects1" Relationship="Self.ProjectPhase" FromRole="Phase" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhaseID" Type="Int32" />
+          <Property Name="EstStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EstEndDate" Type="DateTime" Precision="3" />
+          <Property Name="ActStartDate" Type="DateTime" Precision="3" />
+          <Property Name="ActEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Budget" Type="Double" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Labels" Relationship="Self.FK_Label_Label" FromRole="Project" ToRole="Label" />
+          <NavigationProperty Name="Phase" Relationship="Self.FK_Project_Phase" FromRole="Project" ToRole="Phase" />
+          <NavigationProperty Name="ProjectHistories" Relationship="Self.FK_ProjectHistory_Project" FromRole="Project" ToRole="ProjectHistory" />
+          <NavigationProperty Name="TeamProjects" Relationship="Self.FK_TeamProject_Project" FromRole="Project" ToRole="TeamProject" />
+          <NavigationProperty Name="Phases" Relationship="Self.ProjectPhase" FromRole="Project" ToRole="Phase" />
+          <NavigationProperty Name="Tasks" Relationship="Self.ProjectTask" FromRole="Project" ToRole="Task" />
+          <NavigationProperty Name="Users" Relationship="Self.UserProject" FromRole="Project" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ProjectHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectHistory_Project" FromRole="ProjectHistory" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ProjectHistory_User" FromRole="ProjectHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ProjectTaskPhase">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="PhaseID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="PhaseID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Phase" Relationship="Self.FK_ProjectTaskPhase_Phase" FromRole="ProjectTaskPhase" ToRole="Phase" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhaseID" Type="Int32" />
+          <Property Name="EstStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EstEndDate" Type="DateTime" Precision="3" />
+          <Property Name="ActStartDate" Type="DateTime" Precision="3" />
+          <Property Name="ActEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Cost" Type="Double" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Complete" Type="Boolean" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Labels" Relationship="Self.FK_Label_Task" FromRole="Task" ToRole="Label" />
+          <NavigationProperty Name="Phase" Relationship="Self.FK_Task_Phase" FromRole="Task" ToRole="Phase" />
+          <NavigationProperty Name="TaskHistories" Relationship="Self.FK_TaskHistory_Task" FromRole="Task" ToRole="TaskHistory" />
+          <NavigationProperty Name="Projects" Relationship="Self.ProjectTask" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="Users" Relationship="Self.UserTask" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_TaskHistory_Task" FromRole="TaskHistory" ToRole="Task" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TaskHistory_User" FromRole="TaskHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Team_User" FromRole="Team" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="Self.TeamUser" FromRole="Team" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TeamProject">
+          <Key>
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_TeamProject_Project" FromRole="TeamProject" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BgColour" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="ProjectHistories" Relationship="Self.FK_ProjectHistory_User" FromRole="User" ToRole="ProjectHistory" />
+          <NavigationProperty Name="TaskHistories" Relationship="Self.FK_TaskHistory_User" FromRole="User" ToRole="TaskHistory" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK_Team_User" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="Phases" Relationship="Self.PhaseCore" FromRole="User" ToRole="Phase" />
+          <NavigationProperty Name="Phases1" Relationship="Self.PhaseUser" FromRole="User" ToRole="Phase" />
+          <NavigationProperty Name="Teams1" Relationship="Self.TeamUser" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="Projects" Relationship="Self.UserProject" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="Tasks" Relationship="Self.UserTask" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Label_Label">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Label" Type="Self.Label" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Label">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Label_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Label" Type="Self.Label" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Label">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskPhase_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
+          <End Role="ProjectTaskPhase" Type="Self.ProjectTaskPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectTaskPhase">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Phase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="PhaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectHistory_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectHistory" Type="Self.ProjectHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectHistory">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamProject_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="TeamProject" Type="Self.TeamProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeamProject">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectHistory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ProjectHistory" Type="Self.ProjectHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhaseCore">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="PhaseUser">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectPhase">
+          <End Role="Phase" Type="Self.Phase" Multiplicity="*" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectTask">
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+        </Association>
+        <Association Name="TeamUser">
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserProject">
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserTask">
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="keyphaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Labels" EntityType="Self.Label" />
+          <EntitySet Name="Phases" EntityType="Self.Phase" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="ProjectHistories" EntityType="Self.ProjectHistory" />
+          <EntitySet Name="ProjectTaskPhases" EntityType="Self.ProjectTaskPhase" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="TaskHistories" EntityType="Self.TaskHistory" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="TeamProjects" EntityType="Self.TeamProject" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Label_Label" Association="Self.FK_Label_Label">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Label" EntitySet="Labels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Label_Task" Association="Self.FK_Label_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Label" EntitySet="Labels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Phase" Association="Self.FK_Project_Phase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskPhase_Phase" Association="Self.FK_ProjectTaskPhase_Phase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="ProjectTaskPhase" EntitySet="ProjectTaskPhases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Phase" Association="Self.FK_Task_Phase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectHistory_Project" Association="Self.FK_ProjectHistory_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectHistory" EntitySet="ProjectHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamProject_Project" Association="Self.FK_TeamProject_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="TeamProject" EntitySet="TeamProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectHistory_User" Association="Self.FK_ProjectHistory_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProjectHistory" EntitySet="ProjectHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_Task" Association="Self.FK_TaskHistory_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskHistory" EntitySet="TaskHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_User" Association="Self.FK_TaskHistory_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskHistory" EntitySet="TaskHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_User" Association="Self.FK_Team_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="PhaseCore" Association="Self.PhaseCore">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="PhaseUser" Association="Self.PhaseUser">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectPhase" Association="Self.ProjectPhase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectTask" Association="Self.ProjectTask">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="TeamUser" Association="Self.TeamUser">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserProject" Association="Self.UserProject">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserTask" Association="Self.UserTask">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="keyphaseModelStoreContainer" CdmEntityContainer="keyphaseEntities">
+          <EntitySetMapping Name="Labels">
+            <EntityTypeMapping TypeName="keyphaseModel.Label">
+              <MappingFragment StoreEntitySet="Label">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phases">
+            <EntityTypeMapping TypeName="keyphaseModel.Phase">
+              <MappingFragment StoreEntitySet="Phase">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="keyphaseModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+                <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+                <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+                <ScalarProperty Name="ActStartDate" ColumnName="ActStartDate" />
+                <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectHistories">
+            <EntityTypeMapping TypeName="keyphaseModel.ProjectHistory">
+              <MappingFragment StoreEntitySet="ProjectHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTaskPhases">
+            <EntityTypeMapping TypeName="keyphaseModel.ProjectTaskPhase">
+              <MappingFragment StoreEntitySet="ProjectTaskPhase">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="keyphaseModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+                <ScalarProperty Name="EstStartDate" ColumnName="EstStartDate" />
+                <ScalarProperty Name="EstEndDate" ColumnName="EstEndDate" />
+                <ScalarProperty Name="ActStartDate" ColumnName="ActStartDate" />
+                <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskHistories">
+            <EntityTypeMapping TypeName="keyphaseModel.TaskHistory">
+              <MappingFragment StoreEntitySet="TaskHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="keyphaseModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamProjects">
+            <EntityTypeMapping TypeName="keyphaseModel.TeamProject">
+              <MappingFragment StoreEntitySet="TeamProject">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="keyphaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="BgColour" ColumnName="BgColour" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PhaseCore" TypeName="keyphaseModel.PhaseCore" StoreEntitySet="PhaseCore">
+            <EndProperty Name="Phase">
+              <ScalarProperty Name="ID" ColumnName="PhaseID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PhaseUser" TypeName="keyphaseModel.PhaseUser" StoreEntitySet="PhaseUser">
+            <EndProperty Name="Phase">
+              <ScalarProperty Name="ID" ColumnName="PhaseID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectPhase" TypeName="keyphaseModel.ProjectPhase" StoreEntitySet="ProjectPhase">
+            <EndProperty Name="Phase">
+              <ScalarProperty Name="ID" ColumnName="PhaseID" />
+            </EndProperty>
+            <EndProperty Name="Project">
+              <ScalarProperty Name="ID" ColumnName="ProjectID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectTask" TypeName="keyphaseModel.ProjectTask" StoreEntitySet="ProjectTask">
+            <EndProperty Name="Project">
+              <ScalarProperty Name="ID" ColumnName="ProjectID" />
+            </EndProperty>
+            <EndProperty Name="Task">
+              <ScalarProperty Name="ID" ColumnName="TaskID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TeamUser" TypeName="keyphaseModel.TeamUser" StoreEntitySet="TeamUser">
+            <EndProperty Name="Team">
+              <ScalarProperty Name="ID" ColumnName="TeamID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserProject" TypeName="keyphaseModel.UserProject" StoreEntitySet="UserProject">
+            <EndProperty Name="Project">
+              <ScalarProperty Name="ID" ColumnName="ProjectID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserTask" TypeName="keyphaseModel.UserTask" StoreEntitySet="UserTask">
+            <EndProperty Name="Task">
+              <ScalarProperty Name="ID" ColumnName="TaskID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

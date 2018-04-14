@@ -16,10 +16,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2018 14:03:44</publishTime>
     </File>
     <File Include="bin/KeyPhase.Chat.dll">
-      <publishTime>04/04/2018 10:34:21</publishTime>
+      <publishTime>04/14/2018 19:58:42</publishTime>
     </File>
     <File Include="bin/KeyPhase.Chat.pdb">
-      <publishTime>04/04/2018 10:34:21</publishTime>
+      <publishTime>04/14/2018 19:58:42</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
       <publishTime>04/02/2018 14:03:45</publishTime>
@@ -79,7 +79,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2018 14:03:47</publishTime>
     </File>
     <File Include="Content/chat.css">
-      <publishTime>04/02/2018 17:51:03</publishTime>
+      <publishTime>04/14/2018 18:57:16</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>04/02/2018 15:33:49</publishTime>
@@ -276,6 +276,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/smile.gif">
       <publishTime>04/02/2018 14:03:42</publishTime>
     </File>
+    <File Include="Models/DB/KeyPhase.edmx.diagram">
+      <publishTime>04/14/2018 18:32:43</publishTime>
+    </File>
     <File Include="packages.config">
       <publishTime>04/02/2018 14:03:42</publishTime>
     </File>
@@ -325,7 +328,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2018 14:03:43</publishTime>
     </File>
     <File Include="Scripts/KPChat/KPChat.js">
-      <publishTime>04/02/2018 17:37:53</publishTime>
+      <publishTime>04/14/2018 19:54:34</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>04/02/2018 14:03:43</publishTime>
@@ -334,7 +337,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2018 14:03:42</publishTime>
     </File>
     <File Include="Views/ChatRoom/SignalRChat.cshtml">
-      <publishTime>04/02/2018 17:41:45</publishTime>
+      <publishTime>04/04/2018 11:35:24</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/02/2018 14:03:43</publishTime>
@@ -349,7 +352,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2018 14:03:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/04/2018 10:34:22</publishTime>
+      <publishTime>04/14/2018 19:58:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

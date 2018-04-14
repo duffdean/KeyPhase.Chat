@@ -61,6 +61,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -150,6 +152,51 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Models\DB\KeyPhase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyPhase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\KeyPhase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\KeyPhase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyPhase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Label.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Phase.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Project.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\ProjectHistory.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\ProjectTaskPhase.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Task.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TaskHistory.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Team.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TeamProject.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\User.cs">
+      <DependentUpon>KeyPhase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,11 +263,28 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <EntityDeploy Include="Models\DB\KeyPhase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KeyPhase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB\KeyPhase.edmx.diagram">
+      <DependentUpon>KeyPhase.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\cool.gif" />
     <Content Include="Images\laugh.gif" />
     <Content Include="Images\smile.gif" />
+    <Content Include="Models\DB\KeyPhase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KeyPhase.edmx</DependentUpon>
+      <LastGenOutput>KeyPhase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB\KeyPhase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KeyPhase.edmx</DependentUpon>
+      <LastGenOutput>KeyPhase.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -255,10 +319,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DB\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyPhase.Chat.Models.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,8 @@ namespace KeyPhase.Controllers
         //
         // GET: /ChatRoom/
 
-        public ActionResult SignalRChat()
-        {
+        public ActionResult SignalRChat(int UserID)
+        {           
             return View();
         }
 
